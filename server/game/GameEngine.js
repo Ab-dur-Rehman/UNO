@@ -137,11 +137,21 @@ class GameEngine {
         }
     }
 
+    // Check if a card is a colored draw card (not wild/black)
+    isColoredDrawCard(card) {
+        return card.type !== 'wild' && (card.value === 'draw2' || card.value === 'draw6');
+    }
+
+    // Check if a card is a black/wild draw card
+    isBlackDrawCard(card) {
+        return card.type === 'wild' && (card.value === 'wild_draw4' || card.value === 'wild_draw6' || card.value === 'wild_draw10');
+    }
+
     // Check if a card can be played
     canPlayCard(card, playerHand) {
         const topCard = this.getTopCard();
 
-        // If there's a draw stack, player must play a draw card with EQUAL OR HIGHER value
+        // If there's a draw stack, special stacking rules apply
         if (this.drawStack > 0) {
             const cardDrawValue = this.getDrawValue(card.value);
 
@@ -150,17 +160,47 @@ class GameEngine {
                 return false;
             }
 
-            // Card must have equal or higher draw value (no low on high)
-            if (cardDrawValue < this.lastDrawValue) {
+            // Check if the last played card was colored or black
+            const lastWasColored = this.lastDrawType === 'colored';
+            const lastWasBlack = this.lastDrawType === 'black';
+
+            if (lastWasColored) {
+                // When colored +card was played:
+                // - NO black cards can be played on colored cards
+                if (this.isBlackDrawCard(card)) {
+                    return false;
+                }
+
+                // - Same value colored cards of ANY color can be played (e.g., any +2 on +2)
+                if (cardDrawValue === this.lastDrawValue) {
+                    return true;
+                }
+
+                // - Higher colored cards of SAME color only (e.g., green +6 on green +2)
+                if (cardDrawValue > this.lastDrawValue && card.color === this.currentColor) {
+                    return true;
+                }
+
                 return false;
             }
 
-            // Colored draw cards (draw2, draw6) must match the current color
-            if (card.type !== 'wild' && card.color !== this.currentColor) {
+            if (lastWasBlack) {
+                // When black +card was played:
+                // - Only black cards with EQUAL or HIGHER value can be played
+                // - Colored cards CANNOT be played on black cards
+                if (!this.isBlackDrawCard(card)) {
+                    return false;
+                }
+
+                // Must be equal or higher value
+                if (cardDrawValue >= this.lastDrawValue) {
+                    return true;
+                }
+
                 return false;
             }
 
-            return true;
+            return false;
         }
 
         // Wild cards can always be played
