@@ -293,7 +293,7 @@ function startTurnTimer(code) {
             broadcastGameState(code, game);
             startTurnTimer(code);
         }
-    }, 10000); // 10 seconds
+    }, 15000); // 15 seconds
 
     turnTimers.set(code, timer);
 }

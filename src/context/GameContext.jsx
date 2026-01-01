@@ -34,7 +34,7 @@ export function GameProvider({ children }) {
     const [gameResult, setGameResult] = useState(null);
 
     // Timer state
-    const [timeRemaining, setTimeRemaining] = useState(10);
+    const [timeRemaining, setTimeRemaining] = useState(15);
 
     // Socket event handlers
     useEffect(() => {
@@ -75,7 +75,7 @@ export function GameProvider({ children }) {
             setIsPlaying(true);
             setGameOver(false);
             setGameResult(null);
-            setTimeRemaining(10);
+            setTimeRemaining(15);
         };
 
         const handleGameState = (state) => {
@@ -83,7 +83,7 @@ export function GameProvider({ children }) {
             setCanPlayDrawn(false);
             setDrawnPlayable(null);
             // Reset timer when game state updates
-            setTimeRemaining(10);
+            setTimeRemaining(15);
         };
 
         const handleGameError = ({ message }) => {
@@ -166,7 +166,7 @@ export function GameProvider({ children }) {
     // Reset timer when turn changes
     useEffect(() => {
         if (gameState?.currentPlayerId) {
-            setTimeRemaining(10);
+            setTimeRemaining(15);
         }
     }, [gameState?.currentPlayerId]);
 

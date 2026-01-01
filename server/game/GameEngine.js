@@ -27,7 +27,8 @@ class GameEngine {
         this.winner = null;
         this.loser = null;
         this.turnStartTime = null;
-        this.turnTimeLimit = 10000; // 10 seconds
+        this.turnTimeLimit = 15000; // 15 seconds
+        this.lastDrawValue = 0; // Track the last draw card value for stacking hierarchy
 
         this.initializeDeck();
         this.shuffleDeck();
@@ -124,18 +125,42 @@ class GameEngine {
         return this.discardPile[this.discardPile.length - 1];
     }
 
+    // Get the draw value of a card
+    getDrawValue(cardValue) {
+        switch (cardValue) {
+            case 'draw2': return 2;
+            case 'wild_draw4': return 4;
+            case 'draw6': return 6;
+            case 'wild_draw6': return 6;
+            case 'wild_draw10': return 10;
+            default: return 0;
+        }
+    }
+
     // Check if a card can be played
     canPlayCard(card, playerHand) {
         const topCard = this.getTopCard();
 
-        // If there's a draw stack, player must play a matching draw card or draw
+        // If there's a draw stack, player must play a draw card with EQUAL OR HIGHER value
         if (this.drawStack > 0) {
-            if (card.value === 'draw2' || card.value === 'wild_draw4' ||
-                card.value === 'draw6' || card.value === 'wild_draw6' ||
-                card.value === 'wild_draw10') {
-                return true;
+            const cardDrawValue = this.getDrawValue(card.value);
+
+            // Must be a draw card
+            if (cardDrawValue === 0) {
+                return false;
             }
-            return false;
+
+            // Card must have equal or higher draw value (no low on high)
+            if (cardDrawValue < this.lastDrawValue) {
+                return false;
+            }
+
+            // Colored draw cards (draw2, draw6) must match the current color
+            if (card.type !== 'wild' && card.color !== this.currentColor) {
+                return false;
+            }
+
+            return true;
         }
 
         // Wild cards can always be played
@@ -243,22 +268,27 @@ class GameEngine {
 
             case 'draw2':
                 this.drawStack += 2;
+                this.lastDrawValue = 2;
                 break;
 
             case 'draw6':
                 this.drawStack += 6;
+                this.lastDrawValue = 6;
                 break;
 
             case 'wild_draw4':
                 this.drawStack += 4;
+                this.lastDrawValue = 4;
                 break;
 
             case 'wild_draw6':
                 this.drawStack += 6;
+                this.lastDrawValue = 6;
                 break;
 
             case 'wild_draw10':
                 this.drawStack += 10;
+                this.lastDrawValue = 10;
                 break;
         }
     }
@@ -326,6 +356,7 @@ class GameEngine {
 
         let drawCount = this.drawStack > 0 ? this.drawStack : 1;
         this.drawStack = 0;
+        this.lastDrawValue = 0; // Reset draw value when stack is cleared
 
         const result = this.drawCards(playerId, drawCount);
 
@@ -333,7 +364,8 @@ class GameEngine {
             return result;
         }
 
-        // No-Mercy rule: Draw until you can play (if not drawing from stack)
+        // Draw only 1 card (no draw-until-playable rule)
+        // If drawing a single card, check if it can be played
         if (drawCount === 1) {
             const player = this.players[playerIndex];
             const lastDrawn = result.drawnCards[result.drawnCards.length - 1];
@@ -343,24 +375,8 @@ class GameEngine {
                 // Player can choose to play the drawn card
                 result.canPlayDrawn = true;
                 result.drawnPlayable = lastDrawn;
-            } else {
-                // Must draw until playable (No-Mercy rule) - up to 5 more cards
-                let extraDraws = 0;
-                while (extraDraws < 5 && this.deck.length > 0) {
-                    const extraResult = this.drawCards(playerId, 1);
-                    if (extraResult.gameOver) {
-                        return extraResult;
-                    }
-                    result.drawnCards.push(...extraResult.drawnCards);
-                    const newCard = extraResult.drawnCards[0];
-                    if (this.canPlayCard(newCard, player.hand)) {
-                        result.canPlayDrawn = true;
-                        result.drawnPlayable = newCard;
-                        break;
-                    }
-                    extraDraws++;
-                }
             }
+            // No extra draws - just draw 1 card and move on
         }
 
         // If no playable card found, move to next turn

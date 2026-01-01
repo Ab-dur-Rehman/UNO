@@ -2,9 +2,9 @@ import React from 'react';
 import './Timer.css';
 
 function Timer({ timeRemaining, isMyTurn }) {
-    const percentage = (timeRemaining / 10) * 100;
-    const isLow = timeRemaining <= 3;
-    const isCritical = timeRemaining <= 1;
+    const percentage = (timeRemaining / 15) * 100;
+    const isLow = timeRemaining <= 5;
+    const isCritical = timeRemaining <= 2;
 
     return (
         <div className={`timer ${isMyTurn ? 'active' : ''} ${isLow ? 'low' : ''} ${isCritical ? 'critical' : ''}`}>
