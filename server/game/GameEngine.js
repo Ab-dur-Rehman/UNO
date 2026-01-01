@@ -160,40 +160,42 @@ class GameEngine {
                 return false;
             }
 
-            // Check if the last played card was colored or black
-            const lastWasColored = this.lastDrawType === 'colored';
-            const lastWasBlack = this.lastDrawType === 'black';
+            const topCardDrawValue = this.getDrawValue(topCard.value);
 
-            if (lastWasColored) {
-                // When colored +card was played:
+            // Check top card type (use helper methods)
+            const topIsColored = this.isColoredDrawCard(topCard);
+            const topIsBlack = this.isBlackDrawCard(topCard);
+
+            if (topIsColored) {
+                // When top is colored +card:
                 // - NO black cards can be played on colored cards
                 if (this.isBlackDrawCard(card)) {
                     return false;
                 }
 
                 // - Same value colored cards of ANY color can be played (e.g., any +2 on +2)
-                if (cardDrawValue === this.lastDrawValue) {
+                if (cardDrawValue === topCardDrawValue) {
                     return true;
                 }
 
-                // - Higher colored cards of SAME color only (e.g., green +6 on green +2)
-                if (cardDrawValue > this.lastDrawValue && card.color === this.currentColor) {
+                // - Higher colored cards of SAME color only (e.g., green +4 on green +2)
+                if (cardDrawValue > topCardDrawValue && card.color === this.currentColor) {
                     return true;
                 }
 
                 return false;
             }
 
-            if (lastWasBlack) {
-                // When black +card was played:
+            if (topIsBlack) {
+                // When top is black +card:
                 // - Only black cards with EQUAL or HIGHER value can be played
-                // - Colored cards CANNOT be played on black cards
+                // - Colored cards CANNOT be played on black cards (user request)
                 if (!this.isBlackDrawCard(card)) {
                     return false;
                 }
 
                 // Must be equal or higher value
-                if (cardDrawValue >= this.lastDrawValue) {
+                if (cardDrawValue >= topCardDrawValue) {
                     return true;
                 }
 

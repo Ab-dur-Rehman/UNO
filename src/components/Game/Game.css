@@ -26,6 +26,38 @@
 }
 
 /* Opponents Container */
+.game-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.rules-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+    margin-top: 10px;
+}
+
+.rules-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
 .opponents-container {
     position: fixed;
     top: 0;

@@ -9,6 +9,7 @@ import Timer from './Timer';
 import GameInfo from './GameInfo';
 import ColorPicker from './ColorPicker';
 import Card from './Card';
+import RulesModal from './RulesModal';
 import './Game.css';
 
 function Game() {
@@ -29,6 +30,8 @@ function Game() {
         selectColor,
         setShowColorPicker
     } = useGame();
+
+    const [showRules, setShowRules] = React.useState(false);
 
     if (!gameState) {
         return (
@@ -90,13 +93,22 @@ function Game() {
     return (
         <div className="game-container">
             {/* Game Info */}
-            <GameInfo
-                direction={gameState.direction}
-                drawStack={gameState.drawStack}
-                roomCode={gameState.roomCode}
-                currentPlayerName={gameState.players.find(p => p.id === gameState.currentPlayerId)?.name}
-                unoCaller={unoCaller}
-            />
+            <div className="game-status-bar">
+                <GameInfo
+                    direction={gameState.direction}
+                    drawStack={gameState.drawStack}
+                    roomCode={gameState.roomCode}
+                    currentPlayerName={gameState.players.find(p => p.id === gameState.currentPlayerId)?.name}
+                    unoCaller={unoCaller}
+                />
+                <button
+                    className="rules-button"
+                    onClick={() => setShowRules(true)}
+                    title="How to Play"
+                >
+                    ?
+                </button>
+            </div>
 
             {/* Opponents */}
             <div className="opponents-container">
@@ -174,6 +186,11 @@ function Game() {
                     onSelect={selectColor}
                     onCancel={() => setShowColorPicker(false)}
                 />
+            )}
+
+            {/* Rules Modal */}
+            {showRules && (
+                <RulesModal onClose={() => setShowRules(false)} />
             )}
 
             {/* Error Toast */}
