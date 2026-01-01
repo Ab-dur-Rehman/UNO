@@ -1,0 +1,270 @@
+/* Card Styles */
+
+.card {
+    position: relative;
+    width: 80px;
+    height: 120px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.card.small {
+    width: 50px;
+    height: 75px;
+    border-radius: 6px;
+}
+
+.card.large {
+    width: 100px;
+    height: 150px;
+    border-radius: 12px;
+}
+
+.card.playable:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.4),
+        0 0 20px currentColor;
+    z-index: 10;
+}
+
+.card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.card.highlight {
+    animation: cardGlow 1s ease-in-out infinite;
+    transform: translateY(-10px);
+}
+
+@keyframes cardGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 5px 15px rgba(0, 0, 0, 0.3),
+            0 0 20px rgba(139, 92, 246, 0.5);
+    }
+
+    50% {
+        box-shadow:
+            0 5px 15px rgba(0, 0, 0, 0.3),
+            0 0 40px rgba(139, 92, 246, 0.8);
+    }
+}
+
+.animate-deal {
+    animation: cardDeal 0.4s ease backwards;
+}
+
+/* Card Colors */
+.card-red {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #ef4444;
+    border: 3px solid #fca5a5;
+}
+
+.card-blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #3b82f6;
+    border: 3px solid #93c5fd;
+}
+
+.card-green {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #22c55e;
+    border: 3px solid #86efac;
+}
+
+.card-yellow {
+    background: linear-gradient(135deg, #eab308, #ca8a04);
+    color: #eab308;
+    border: 3px solid #fde047;
+}
+
+.card-black {
+    background: linear-gradient(135deg, #374151, #1f2937);
+    color: #9ca3af;
+    border: 3px solid #6b7280;
+}
+
+/* Card Inner */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    margin: 0;
+    border-radius: 6px;
+    transform: scale(0.85);
+}
+
+.card-corner {
+    position: absolute;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.card.small .card-corner {
+    font-size: 10px;
+}
+
+.card.large .card-corner {
+    font-size: 18px;
+}
+
+.top-left {
+    top: 5px;
+    left: 8px;
+}
+
+.bottom-right {
+    bottom: 5px;
+    right: 8px;
+    transform: rotate(180deg);
+}
+
+.card-center {
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.card.small .card-center {
+    font-size: 22px;
+}
+
+.card.large .card-center {
+    font-size: 48px;
+}
+
+.card-label {
+    position: absolute;
+    bottom: 20px;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+.card.small .card-label {
+    display: none;
+}
+
+/* Wild Card */
+.wild-card .card-inner {
+    background: linear-gradient(135deg,
+            rgba(239, 68, 68, 0.3) 0%,
+            rgba(234, 179, 8, 0.3) 25%,
+            rgba(34, 197, 94, 0.3) 50%,
+            rgba(59, 130, 246, 0.3) 75%,
+            rgba(239, 68, 68, 0.3) 100%);
+}
+
+.wild-card .card-center {
+    font-size: 28px;
+}
+
+.wild-card.small .card-center {
+    font-size: 18px;
+}
+
+.wild-colors {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    gap: 4px;
+}
+
+.wild-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.card.small .wild-colors {
+    bottom: 4px;
+}
+
+.card.small .wild-dot {
+    width: 5px;
+    height: 5px;
+}
+
+.wild-dot.red {
+    background: #ef4444;
+}
+
+.wild-dot.blue {
+    background: #3b82f6;
+}
+
+.wild-dot.green {
+    background: #22c55e;
+}
+
+.wild-dot.yellow {
+    background: #eab308;
+}
+
+/* Card Back */
+.card-back {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    border: 3px solid #374151;
+    cursor: default;
+}
+
+.card-back-design {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at center,
+            rgba(239, 68, 68, 0.3) 0%,
+            rgba(234, 179, 8, 0.2) 25%,
+            rgba(34, 197, 94, 0.2) 50%,
+            rgba(59, 130, 246, 0.3) 75%,
+            transparent 100%);
+    border-radius: 6px;
+    transform: scale(0.9);
+}
+
+.back-text {
+    font-size: 20px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: -1px;
+}
+
+.card.small .back-text {
+    font-size: 12px;
+}
+
+.card.large .back-text {
+    font-size: 28px;
+}
+
+/* Keyframes */
+@keyframes cardDeal {
+    from {
+        opacity: 0;
+        transform: translateY(-100px) rotate(-20deg) scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0) scale(1);
+    }
+}

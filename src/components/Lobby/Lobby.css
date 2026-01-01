@@ -1,0 +1,364 @@
+/* Lobby Styles */
+
+.lobby-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.lobby-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Logo Section */
+.logo-section {
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logo-text {
+    font-size: 80px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ef4444, #eab308, #22c55e, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 60px rgba(139, 92, 246, 0.5);
+    letter-spacing: -4px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.logo-subtitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-danger);
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-top: -10px;
+    text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
+.tagline {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* Menu Buttons */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 20px 30px;
+    font-size: 18px;
+}
+
+.btn-icon {
+    font-size: 24px;
+}
+
+/* Rules Preview */
+.rules-preview {
+    background: var(--bg-glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    backdrop-filter: blur(20px);
+    width: 100%;
+}
+
+.rules-preview h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--accent-warning);
+}
+
+.rules-preview ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.rules-preview li {
+    color: var(--text-secondary);
+    font-size: 14px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+}
+
+/* Form Card */
+.form-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    position: relative;
+}
+
+.form-card h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    font-family: inherit;
+    transition: color var(--transition-fast);
+}
+
+.back-btn:hover {
+    color: var(--text-primary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.form-card .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.code-input {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.error-message {
+    color: var(--accent-danger);
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+/* Waiting Room */
+.waiting-room {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+}
+
+.waiting-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.waiting-header h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.room-code-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.code-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.code-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, var(--accent-primary), #7c3aed);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.code-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+.code {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 6px;
+}
+
+.copy-icon {
+    font-size: 20px;
+}
+
+.code-hint {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Players Section */
+.players-section {
+    margin-bottom: 30px;
+}
+
+.players-section h3 {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    animation: slideUp var(--transition-normal) ease backwards;
+}
+
+.player-item.host {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(234, 179, 8, 0.1));
+    border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.player-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.player-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.host-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(234, 179, 8, 0.2);
+    border-radius: 20px;
+    color: var(--accent-warning);
+}
+
+/* Waiting Actions */
+.waiting-actions {
+    text-align: center;
+}
+
+.start-btn {
+    width: 100%;
+    padding: 18px 30px;
+    font-size: 18px;
+}
+
+.waiting-hint {
+    color: var(--text-muted);
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.waiting-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.waiting-message p {
+    color: var(--text-secondary);
+}
+
+.waiting-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.waiting-dots span {
+    width: 12px;
+    height: 12px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+.waiting-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.waiting-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 60px;
+    }
+
+    .logo-subtitle {
+        font-size: 20px;
+        letter-spacing: 4px;
+    }
+
+    .rules-preview ul {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card,
+    .waiting-room {
+        padding: 25px;
+    }
+
+    .code {
+        font-size: 24px;
+        letter-spacing: 4px;
+    }
+}

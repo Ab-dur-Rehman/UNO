@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="25%" style="stop-color:#eab308"/>
+      <stop offset="50%" style="stop-color:#22c55e"/>
+      <stop offset="75%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#ef4444"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="50" cy="50" rx="45" ry="50" fill="url(#grad)" stroke="#000" stroke-width="3"/>
+  <ellipse cx="50" cy="50" rx="30" ry="35" fill="#000"/>
+  <text x="50" y="60" font-family="Arial Black" font-size="24" fill="white" text-anchor="middle" font-weight="bold">UNO</text>
+</svg>

@@ -1,0 +1,93 @@
+/* Timer Styles */
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.timer-circle {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+
+.timer-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-bg {
+    fill: none;
+    stroke: var(--bg-tertiary);
+    stroke-width: 6;
+}
+
+.timer-progress {
+    fill: none;
+    stroke: var(--accent-success);
+    stroke-width: 6;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.1s linear, stroke 0.3s ease;
+}
+
+.timer.low .timer-progress {
+    stroke: var(--accent-warning);
+}
+
+.timer.critical .timer-progress {
+    stroke: var(--accent-danger);
+}
+
+.timer.critical .timer-circle {
+    animation: shake 0.3s ease infinite;
+}
+
+.timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.timer.low .timer-text {
+    color: var(--accent-warning);
+}
+
+.timer.critical .timer-text {
+    color: var(--accent-danger);
+    animation: pulse 0.5s ease infinite;
+}
+
+.timer-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timer.active .timer-label {
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    75% {
+        transform: translateX(3px);
+    }
+}
